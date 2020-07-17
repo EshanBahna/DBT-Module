@@ -1,0 +1,170 @@
+create database SQL_Asgn_5;
+use SQL_Asgn_5;
+
+create table SALESPEOPLE(
+Snum int(4),
+Sname varchar(10),
+City varchar(10),
+Comm float(3, 2));
+
+desc SALESPEOPLE;
+
+create table CUSTOMERS(
+Cnum int(4),
+Cname varchar(10),
+City varchar(10),
+Rating int(4),
+Snum int(4));
+
+create table ORDERS(
+Onum int(4),
+Amt float(7, 2),
+Odate date,
+Cnum int(4),
+Snum int(4));
+
+insert into SALESPEOPLE(SNUM, SNAME, CITY, COMM)
+VALUES(
+1001, 'Peel', 'London', .12);
+
+insert into SALESPEOPLE(Snum, Sname, City, Comm)
+VALUES(
+1002, 'Serres', 'San Josh', .13);
+
+insert into SALESPEOPLE(Snum, Sname, City, Comm)
+VALUES(
+1004, 'Motika', 'London', .11);
+
+insert into SALESPEOPLE(Snum, Sname, City, Comm)
+VALUES(
+1007, 'Rifkin', 'Barcelona', .15);
+
+insert into SALESPEOPLE(Snum, Sname, City, Comm)
+VALUES(
+1003, 'Axelrod', 'NewYork', .10);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+Values(
+2001, 'Hoffman', 'London', 100, 1001);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2002, 'Giovanni', 'Rome', 200, 1003);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2003, 'Liu', 'San Jose', 200, 1002);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2004, 'Grass', 'Berlin', 300, 1002);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2006, 'Clemens', 'London', 100, 1001);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2008, 'Cisneros', 'San Jose', 300, 1007);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2007, 'Pereira', 'Rome', 100, 1004);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3001, 18.69, '1990-10-03', 2008, 1007);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3003, 767.19, '1990-10-03', 2001, 1001);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3002, 1900.10, '90-10-03', 2007, 1004);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3005, 5160.45, '1990-10-03', 2003, 1002);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3006, 1098.16, '1990-10-03', 2008, 1007);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3009, 1713.23, '1990-10-04', 2002, 1003);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3007, 75.75, '1990-10-04', 2004, 1002);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3008, 4723.00, '1990-10-05', 2006, 1001);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3010, 1309.95, '1990-10-06', 2004, 1002);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3011, 9891.88, '1990-10-06', 2006, 1001);
+
+
+/* Relational and Logical Operators. */
+
+/* Write a query that will give you all orders for more than Rs. 1,000. */
+
+select * from Orders where amt > 1000;
+
+
+/* Write a query that will give you the names and cities of all salespeople in London
+with a commission above .10. */
+
+select snum, city from SalesPeople where city = 'London' and comm > .10;
+
+
+/* Write a query on the Customers table whose output will exclude all customers
+with a rating <= 100, unless they are located in Rome */
+
+select cname from customers where rating > 100 and city = 'Rome';
+
+/* What will be the output from the following query? */
+
+ Select * from Orders where (amt < 1000 OR NOT (odate = '1990-10-03' AND cnum > 2003));
+/*
+ Onum	Amt	Odate	Cnum	Snum
+3001	18.69	10/3/1990	2008	1007
+3003	767.19	10/3/1990	2001	1001
+3005	5160.45	10/3/1990	2003	1002
+3009	1713.23	10/4/1990	2002	1003
+3007	75.75	10/4/1990	2004	1002
+3008	4723	10/5/1990	2006	1001
+3010	1309.95	10/6/1990	2004	1002
+3011	9891.88	10/6/1990	2006	1001
+*/
+
+/*  What will be the output of the following query? */
+
+Select * from Orders where NOT ((odate = '1990-10-03' OR snum >1006) AND amt >= 1500);
+
+/*
+Onum	Amt	Odate	Cnum	Snum
+3001	18.69	10/3/1990	2008	1007
+3003	767.19	10/3/1990	2001	1001
+3006	1098.16	10/3/1990	2008	1007
+3009	1713.23	10/4/1990	2002	1003
+3007	75.75	10/4/1990	2004	1002
+3008	4723	10/5/1990	2006	1001
+3010	1309.95	10/6/1990	2004	1002
+3011	9891.88	10/6/1990	2006	1001
+*/
+
+/* What is a simpler way to write this query? */
+
+-- Select snum, sname, city, comm From Salespeople where (comm > .12 OR comm <.14);
+
+Select * From Salespeople where (comm > .12 OR comm <.14);
+
+ 

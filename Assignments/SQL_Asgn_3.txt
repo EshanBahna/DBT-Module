@@ -1,0 +1,14 @@
+DBT MODULE
+----------
+
+ASSIGNMENT - 3
+--------------
+
+Q Does ANSI Recognize the data type date?
+
+Ans: Yes, Date complies with the ANSI SQL Standard Defination.
+
+
+Q Which Subdivision of SQL is used to insert values in tables?
+
+Ans: Data Manipulation Language.  

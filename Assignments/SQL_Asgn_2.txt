@@ -1,0 +1,25 @@
+DBT Module
+----------
+
+Assignment - 2 
+--------------
+
+
+Q Which Field of the Customers Table is the Primary Key?
+
+Ans:  CNUM field of the Customer Table is the Primary Key.
+      ----
+
+Q What is the Fourth Column of the Customer Table?
+
+Ans: RATING is the Fourth Column of the Customer Table.
+     ------
+
+Q What is Another word of Row for Column?
+
+Ans: TUPLE
+     -----
+
+Q Why isn't it possible to see the first row of the Table?
+
+Ans: No, it is not Possible to see the First row of the Table.
