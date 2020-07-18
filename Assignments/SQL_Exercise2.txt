@@ -1,0 +1,106 @@
+show databases;
+create database sql_exercise_2;
+use sql_exercise_2;
+
+
+create table supplier(`S#` char(2), Sname varchar(20), Status int(2), City varchar(20));
+
+create table parts(`P#` char(2), pname varchar(20), color varchar(15), weight int, city varchar(20));
+
+create table projects(`J#` char(2), jname varchar(20), city varchar(20));
+
+-- Supplier Table
+insert into  supplier(`s#`, sname, status, city)
+values('S1', 'Sam', 10, 'London');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S2', 'Justin', 20, 'London');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S3', 'Mathews', 30, 'Paris');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S4', 'Jhon', 40, 'Athens');
+
+insert into supplier(`S#`, sname, status, city)
+values('S5', 'Lucy', 50, 'Mumbai');
+
+
+-- Parts
+insert into parts(`P#`, pname, color, weight, city)
+values('P1', 'Sam', 'Red', 13, 'London');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P2', 'Jerry', 'Blue', 12, 'London');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P3', 'Tom', 'White', 13, 'Athens');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P4', 'Kelly', 'Voilet', 12, 'Paris');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P5', 'Molly', 'Magenta', 13, 'Athens');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P6', 'Jolly', 'Cherrish Blue', 13, 'New York');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P7', 'Adam', 'Grey', 13, 'San Fransisco');
+
+-- projects
+insert into projects(`J#`, jname, city)
+values('J1', 'Adam', 'Athens');
+
+insert into projects(`J#`, jname, city)
+values('J2', 'Enrique', 'Athens');
+
+insert into projects(`J#`, jname, city)
+values('J3', 'Chan', 'London');
+
+============================================================================================================================================================
+============================================================================================================================================================
+
+-- Quetions of Exercise 2
+==========================
+
+
+/* Display the Supplier table in the descending order of CITY.  */
+
+Select * from Supplier order by city desc;
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* Display the Part Table in the ascending order of CITY and within the city in
+the ascending order of Part names. */
+
+select * from parts order by city and (select pname order by pname asc);
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* Display all the Suppliers with a status between 10 and 20. */
+
+select sname, status from Supplier where status between 10 and 20;
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* Display all the Parts and their Weight, which are not in the range of 10 and 15. */
+
+select pname, weight from parts where pname not between 10 and 15;
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* Display all the Part names starting with the letter ‘S’.  */
+
+Select pname from  parts where pname > 'A' and pname < 'B';
+
+-- or
+
+select pname from parts where pname like 'A%';
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/* Display all the Suppliers, belonging to cities starting with the letter ‘L’.  */
+
+select sname as "Name Belongs To", city from supplier where sname like 'L%';
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* Display all the Projects, with the second letter in JNAME as ‘n’.  */
+
+select jname from Projects where jname like '_n%';
