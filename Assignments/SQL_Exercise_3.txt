@@ -1,0 +1,90 @@
+/* SQL_Exercise-3 */
+show databases;
+create database sql_exercise_3;
+use sql_exercise_3;
+
+create table supplier(`S#` char(2), Sname varchar(20), Status int(2), City varchar(20));
+
+insert into  supplier(`s#`, sname, status, city)
+values('S1', 'Sam', 10, 'London');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S2', 'Justin', 20, 'London');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S3', 'Mathews', 30, 'Paris');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S4', 'Jhon', 40, 'Athens');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S5', 'Singla', 50, 'Athens');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S4', 'Solap', 50, 'Las Vegas');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S5', 'Loony', 60, 'Las Vegas');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S6', 'Blake', 70, 'Citidal');
+
+
+
+#================================================================================================
+
+/* Display all the Supplier names with the initial letter capital.  */
+
+select concat(substr(upper(sname), 1, 1), substr(lower(sname),2)) as sname from supplier;
+
+
+/* Display all the Supplier names in upper case. */
+
+select upper(sname) as sname from supplier;
+
+
+/* Display all the Supplier names in lower case.  */
+
+
+
+select lower(sname) as sname from supplier;
+
+
+/* Display all the Supplier names padded to 25 characters, with spaces on the left. */
+
+select lpad(sname, 25, ' ') as sname from supplier;
+
+
+/* Display all the Supplier names (with ‘la’ replaced by ‘ro’).  */
+
+select replace(sname, 'la', 'ra') as sname from supplier;
+
+select * from supplier;
+
+
+/* Implement the above command such that ‘l’ is replaced with ‘r’ and ‘a’ is replaced
+with ‘o’.  */
+
+select replace(replace(sname, 'a', 'o'), 'l', 'r') from supplier;
+
+select replace(replace(replace(replace(replace(sname, 'a', ' '), 'e', ' '), 'i', ' '), 'o', ' '), 'u', ' ') from supplier;
+
+
+/* Display the Supplier names and the lengths of the names.  */
+
+select sname, length(sname) as length from supplier;
+
+
+/* Use the soundex function to search for a supplier by the name of ‘BLOKE’. */
+
+select sname from supplier where soundex(sname) = soundex('BLOKE');
+
+
+/* Display the Supplier name and the status (as Ten, Twenty, Thirty, etc.). */
+
+#select concat(sname, concat(' ', status)) from supplier;
+
+
+/* Display the current day (e.g. Thursday).  */
+
+Select dayname(now());
