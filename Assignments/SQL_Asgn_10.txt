@@ -1,0 +1,90 @@
+create database sql_asgn_10;
+use sql_asgn_10;
+
+create table SALESPEOPLE(
+Snum int(4),
+Sname varchar(10),
+City varchar(10),
+Comm float(3, 2));
+
+desc SALESPEOPLE;
+
+create table CUSTOMERS(
+Cnum int(4),
+Cname varchar(10),
+City varchar(10),
+Rating int(4),
+Snum int(4));
+
+
+insert into SALESPEOPLE(SNUM, SNAME, CITY, COMM)
+VALUES(
+1001, 'Peel', 'London', .12);
+
+insert into SALESPEOPLE(Snum, Sname, City, Comm)
+VALUES(
+1002, 'Serres', 'San Josh', .13);
+
+insert into SALESPEOPLE(Snum, Sname, City, Comm)
+VALUES(
+1004, 'Motika', 'London', .11);
+
+insert into SALESPEOPLE(Snum, Sname, City, Comm)
+VALUES(
+1007, 'Rifkin', 'Barcelona', .15);
+
+insert into SALESPEOPLE(Snum, Sname, City, Comm)
+VALUES(
+1003, 'Axelrod', 'NewYork', .10);
+
+select * from SALESPEOPLE;
+
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+Values(
+2001, 'Hoffman', 'London', 100, 1001);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2002, 'Giovanni', 'Rome', 200, 1003);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2003, 'Liu', 'San Jose', 200, 1002);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2004, 'Grass', 'Berlin', 300, 1002);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2006, 'Clemens', 'London', 100, 1001);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2008, 'Cisneros', 'San Jose', 300, 1007);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2007, 'Pereira', 'Rome', 100, 1004);
+
+Select * from CUSTOMERS;
+
+
+-- ------------------------------------------------------------------------------------------------------
+
+#Assignment 10 Questions
+########################
+
+/* Write a query that produces all pairs of salespeople who are living in the same
+city. Exclude combinations of salespeople with themselves as well as duplicate
+rows with the order reversed. */
+
+select x.sname, y.sname, x.city from salespeople x, salespeople y where x.city = y.city
+and x.sname > y.sname;
+
+
+/* Write a query that produces the names and cities of all customers with the same
+rating as Hoffman. */
+
+select cname, city from customers where rating = (select rating from customers where lower(cname) = 'hoffman');
