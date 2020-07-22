@@ -1,0 +1,136 @@
+create database sql_exercise_4;
+use sql_exercise_4;
+
+create table supplier(`S#` char(2), Sname varchar(20), Status int(2), City varchar(20));
+
+
+create table parts(`P#` char(2), pname varchar(20), color varchar(15), weight int, city varchar(20));
+
+create table projects(`J#` char(2), jname varchar(20), city varchar(20));
+
+create table spj(`S#` char(2), `P#` char(2), `J#` char(2), qty int);
+
+insert into spj(`S#`, `P#`, `J#`, qty)
+values('S1', 'P1' , 'J1', 100);
+
+insert into spj(`S#`, `P#`, `J#`, qty)
+values('S1', 'P1' , 'J1', 200);
+
+insert into spj(`S#`, `P#`, `J#`, qty)
+values('S2', 'P2' , 'J2', 300);
+
+insert into spj(`S#`, `P#`, `J#`, qty)
+values('S3', 'P3' , 'J3', 1000);
+
+insert into spj(`S#`, `P#`, `J#`, qty)
+values('S3', 'P3' , 'J3', 500);
+
+insert into spj(`S#`, `P#`, `J#`, qty)
+values('S3', 'P3' , 'J3', 2000);
+
+
+insert into  supplier(`s#`, sname, status, city)
+values('S1', 'Sam', 10, 'London');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S2', 'Justin', 20, 'London');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S3', 'Mathews', 30, 'Paris');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S4', 'Jhon', 40, 'Athens');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P1', 'Sam', 'Red', 13, 'London');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P2', 'Jerry', 'Blue', 12, 'London');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P3', 'Tom', 'White', 13, 'Athens');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P4', 'Kelly', 'Voilet', 12, 'Paris');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P5', 'Molly', 'Magenta', 13, 'Athens');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P6', 'Jolly', 'Cherrish Blue', 13, 'New York');
+
+insert into projects(`J#`, jname, city)
+values('J1', 'Adam', 'Athens');
+
+insert into projects(`J#`, jname, city)
+values('J2', 'Enrique', 'Athens');
+
+insert into projects(`J#`, jname, city)
+values('J3', 'Chan', 'London');
+
+
+
+
+# Exercise Questions
+
+/* Display the minimum Status in the Supplier table. */
+select min(status) from supplier;
+
+
+/* Display the maximum Weight in the Parts table.  */
+select max(weight) from parts;
+
+
+/* Display the average Weight of the Parts. */
+select avg(weight) from parts;
+select sum(weight) / count(`P#`) from parts;
+
+
+/* Display the total Quantity sold for part ‘P1’.  */
+select sum(qty) from spj where `P#` = 'P1';
+
+
+/* Display the total Quantity sold for each part.  */
+select sum(qty) from spj group by `P#`, `S#`, `J#`;
+
+
+/* Display the average Quantity sold for each part.  */
+select avg(qty) from spj group by `S#`, `P#`, `J#`;
+
+
+/* Display the maximum Quantity sold for each part, provided the maximum Quantity
+is greater than 800.  */
+select max(qty) from spj where qty > 800 group by `S#`, `P#`, `J#`;
+
+
+/* Display the Status and the count of Suppliers with that Status.  */
+select status, count(`S#`) from supplier group by status;
+
+
+/* Display the count of Projects going on in different cities.  */
+select count(jname), city from projects group by city;
+
+/* What is the difference between COUNT(Status) and COUNT(*) ?  */
+
+# count(*) --> returns count of all record.
+# count(status) --> returns count of all non-values.
+
+
+/* Display the Status and the Count of Suppliers with that Status in the following format
+as shown below:-
+
+Status Count
+Ten     1
+Twenty  2
+Thirty  3  */
+
+select status,  `S#` as count from supplier group by 2;
+
+
+
+
+
+
+
+
+
