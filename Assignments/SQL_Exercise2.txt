@@ -5,11 +5,12 @@ use sql_exercise_2;
 
 create table supplier(`S#` char(2), Sname varchar(20), Status int(2), City varchar(20));
 
+desc supplier;
+
 create table parts(`P#` char(2), pname varchar(20), color varchar(15), weight int, city varchar(20));
 
 create table projects(`J#` char(2), jname varchar(20), city varchar(20));
 
--- Supplier Table
 insert into  supplier(`s#`, sname, status, city)
 values('S1', 'Sam', 10, 'London');
 
@@ -22,41 +23,34 @@ values('S3', 'Mathews', 30, 'Paris');
 insert into  supplier(`s#`, sname, status, city)
 values('S4', 'Jhon', 40, 'Athens');
 
-insert into supplier(`S#`, sname, status, city)
-values('S5', 'Lucy', 50, 'Mumbai');
-
-
--- Parts
 insert into parts(`P#`, pname, color, weight, city)
-values('P1', 'Sam', 'Red', 13, 'London');
+values('P1', 'Tyre', 'Red', 13, 'London');
 
 insert into parts(`P#`, pname, color, weight, city)
-values('P2', 'Jerry', 'Blue', 12, 'London');
+values('P2', 'Rim', 'Blue', 12, 'London');
 
 insert into parts(`P#`, pname, color, weight, city)
-values('P3', 'Tom', 'White', 13, 'Athens');
+values('P3', 'Steering', 'White', 13, 'Athens');
 
 insert into parts(`P#`, pname, color, weight, city)
-values('P4', 'Kelly', 'Voilet', 12, 'Paris');
+values('P4', 'Window_Glass', 'Voilet', 12, 'Paris');
 
 insert into parts(`P#`, pname, color, weight, city)
-values('P5', 'Molly', 'Magenta', 13, 'Athens');
+values('P5', 'Headlight', 'Magenta', 13, 'Athens');
 
 insert into parts(`P#`, pname, color, weight, city)
-values('P6', 'Jolly', 'Cherrish Blue', 13, 'New York');
+values('P6', 'TailLight', 'Cherrish Blue', 13, 'New York');
 
-insert into parts(`P#`, pname, color, weight, city)
-values('P7', 'Adam', 'Grey', 13, 'San Fransisco');
-
--- projects
-insert into projects(`J#`, jname, city)
-values('J1', 'Adam', 'Athens');
 
 insert into projects(`J#`, jname, city)
-values('J2', 'Enrique', 'Athens');
+values('J1', 'project1', 'Athens');
 
 insert into projects(`J#`, jname, city)
-values('J3', 'Chan', 'London');
+values('J2', 'project2', 'Athens');
+
+insert into projects(`J#`, jname, city)
+values('J3', 'project3', 'London');
+
 
 ============================================================================================================================================================
 ============================================================================================================================================================
