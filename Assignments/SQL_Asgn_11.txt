@@ -1,0 +1,149 @@
+create database sql_asgn_11;
+use sql_asgn_11;
+
+create table SALESPEOPLE(
+Snum int(4),
+Sname varchar(10),
+City varchar(10),
+Comm float(3, 2));
+
+desc SALESPEOPLE;
+
+create table CUSTOMERS(
+Cnum int(4),
+Cname varchar(10),
+City varchar(10),
+Rating int(4),
+Snum int(4));
+
+desc CUSTOMERS;
+
+create table ORDERS(
+Onum int(4),
+Amt float(7, 2),
+Odate date,
+Cnum int(4),
+Snum int(4));
+
+desc ORDERS;
+
+insert into SALESPEOPLE(SNUM, SNAME, CITY, COMM)
+VALUES(
+1001, 'Peel', 'London', .12);
+
+insert into SALESPEOPLE(Snum, Sname, City, Comm)
+VALUES(
+1002, 'Serres', 'San Josh', .13);
+
+insert into SALESPEOPLE(Snum, Sname, City, Comm)
+VALUES(
+1004, 'Motika', 'London', .11);
+
+insert into SALESPEOPLE(Snum, Sname, City, Comm)
+VALUES(
+1007, 'Rifkin', 'Barcelona', .15);
+
+insert into SALESPEOPLE(Snum, Sname, City, Comm)
+VALUES(
+1003, 'Axelrod', 'NewYork', .10);
+
+
+select * from SALESPEOPLE;
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+Values(
+2001, 'Hoffman', 'London', 100, 1001);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2002, 'Giovanni', 'Rome', 200, 1003);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2003, 'Liu', 'San Jose', 200, 1002);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2004, 'Grass', 'Berlin', 300, 1002);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2006, 'Clemens', 'London', 100, 1001);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2008, 'Cisneros', 'San Jose', 300, 1007);
+
+insert into CUSTOMERS(Cnum, Cname, City, Rating, Snum)
+VALUES(
+2007, 'Pereira', 'Rome', 100, 1004);
+
+Select * from CUSTOMERS;
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3001, 18.69, '1990-10-03', 2008, 1007);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3003, 767.19, '1990-10-03', 2001, 1001);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3002, 1900.10, '90-10-03', 2007, 1004);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3005, 5160.45, '1990-10-03', 2003, 1002);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3006, 1098.16, '1990-10-03', 2008, 1007);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3009, 1713.23, '1990-10-04', 2002, 1003);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3007, 75.75, '1990-10-04', 2004, 1002);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3008, 4723.00, '1990-10-05', 2006, 1001);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3010, 1309.95, '1990-10-06', 2004, 1002);
+
+insert into ORDERS(Onum, Amt, Odate, Cnum, Snum)
+VALUES(
+3011, 9891.88, '1990-10-06', 2006, 1001);
+
+select * from orders;
+
+
+
+-- Assignment 11 Questions
+###########################
+
+
+/* Write a query that uses a subquery to obtain all orders for the customer named
+Cisneros. Assume you do not know his customer number (cnum). */
+select onum, cnum  from orders where cnum = (select cnum from customers where cname = 'Cisneros');
+
+
+
+/* Write a query that produces the names and ratings of all customers who have above-average orders. */
+
+select distinct cname, rating from customers, orders where customers.cnum = orders.cnum 
+and orders.amt >(select avg(amt) from orders );
+
+select cname, rating from customers where cnum in (select cnum from orders where amt > (select avg(amt) from orders));
+
+
+
+/* Write a query that selects the total amount in orders for each salesperson for
+whom this total is greater than the amount of the largest order in the table. */
+
+select sum(amt) from orders group by snum having sum(amt) > (select max(amt) from orders); 
