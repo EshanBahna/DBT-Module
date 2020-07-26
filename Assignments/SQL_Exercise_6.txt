@@ -125,7 +125,7 @@ select ename from emp where sal = (select min(sal) from emp);
 /*  Display the name of the Supplier who has sold the maximum overall Quantity (sum of Sales). */
 #select sum(qty) from spj group by `S#` order by sum(qty) desc;
 
-select sname from supplier where `S#` = (select `S#` from spj where qty = (select sum(qty) from spj));
+select sname from supplier where `S#` = (select `S#` from spj where qty = (select max(qty) from spj));
 
 
 
