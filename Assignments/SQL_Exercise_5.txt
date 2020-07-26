@@ -1,0 +1,145 @@
+create database sql_exercise_5;
+use sql_exercise_5;
+
+
+create table supplier(`S#` char(2), Sname varchar(20), Status int(2), City varchar(20));
+
+desc supplier;
+
+create table parts(`P#` char(2), pname varchar(20), color varchar(15), weight int, city varchar(20));
+
+create table projects(`J#` char(2), jname varchar(20), city varchar(20));
+
+insert into  supplier(`s#`, sname, status, city)
+values('S1', 'Sam', 10, 'London');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S2', 'Justin', 20, 'London');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S3', 'Mathews', 30, 'Paris');
+
+insert into  supplier(`s#`, sname, status, city)
+values('S4', 'Jhon', 40, 'Athens');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P1', 'A', 'Red', 13, 'London');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P2', 'B', 'Blue', 12, 'London');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P3', 'C', 'White', 13, 'Athens');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P4', 'D', 'Voilet', 12, 'Paris');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P5', 'E', 'Magenta', 13, 'Athens');
+
+insert into parts(`P#`, pname, color, weight, city)
+values('P6', 'F', 'Cherrish Blue', 13, 'New York');
+
+
+insert into projects(`J#`, jname, city)
+values('J1', 'project1', 'Athens');
+
+insert into projects(`J#`, jname, city)
+values('J2', 'project2', 'Athens');
+
+insert into projects(`J#`, jname, city)
+values('J3', 'project3', 'London');
+
+
+
+create table spj(`S#` char(2), `P#` char(2), `J#` char(2), qty int);
+
+insert into spj(`S#`, `P#`, `J#`, qty)
+values('S1', 'P1' , 'J1', 100);
+
+insert into spj(`S#`, `P#`, `J#`, qty)
+values('S1', 'P1' , 'J1', 200);
+
+insert into spj(`S#`, `P#`, `J#`, qty)
+values('S2', 'P2' , 'J2', 300);
+
+insert into spj(`S#`, `P#`, `J#`, qty)
+values('S3', 'P3' , 'J3', 1000);
+
+insert into spj(`S#`, `P#`, `J#`, qty)
+values('S3', 'P3' , 'J3', 500);
+
+insert into spj(`S#`, `P#`, `J#`, qty)
+values('S3', 'P3' , 'J3', 2000);
+
+
+-- -------------------------------------------------------------------------------------------------------------
+-- -------------------------------------------------------------------------------------------------------------
+
+#Exercise 5
+###########
+
+
+/* Display the Supplier name and the Quantity sold.  */
+select sname, sum(qty) from supplier s, spj where s.`S#` = spj.`S#` group by sname;
+
+/* Display the Part name and Quantity sold.  */
+select pname, sum(qty) from parts, spj where parts.`P#` = spj.`P#` group by pname;
+
+/* . Display the Project name and Quantity sold. */
+select jname, sum(qty) from projects, spj where projects.`J#` = spj.`J#` group by jname;
+
+
+/* Display the Supplier name, Part name, Project name and Quantity sold.  */
+select sname, pname, jname, sum(qty) from supplier, parts, projects, spj where supplier.`S#` = spj.`S#`
+and parts.`P#` = spj.`P#` and projects.`J#` = spj.`J#` group by sname, pname, jname; 
+
+
+/* Display the Supplier name, Supplying Parts to a Project in the same City.  */
+select sname, count(pname), projects.city  from supplier, parts, projects where supplier.city = projects.city 
+and parts.city = projects.city group by sname, projects.city;
+
+
+
+/* Display the Part name that is ‘Red’ is color, and the Quantity sold.  */
+select pname, color, sum(qty) from parts, spj where parts.`P#` = spj.`P#` and color = 'Red' group by pname, color;
+
+
+/* Display all the Quantity sold by Suppliers with the Status = 20. */
+select qty, sname from spj, supplier where supplier.`S#` = spj.`S#` and status = 20; 
+
+
+/* Display all the Parts and Quantity with a Weight > 14. */
+select pname, qty from parts, spj where parts.`P#` = spj.`P#` and weight > 14;
+
+
+/* Display all the Project names and City, which has bought more than 500 Parts. */
+select jname, projects.city from projects, parts, spj where projects.`J#` = spj.`J#` and parts.`P#` = spj.`P#`
+ and qty > 500;
+ 
+ 
+ /* Display all the Part names and Quantity sold that have a Weight less than 15. */
+ select pname, qty from parts, spj where parts.`P#` = spj.`P#` and  weight < 15;
+ 
+ 
+/* Display all the Employee names and the name of their Managers. */
+
+create table emp(empno char(2), ename varchar(20), sal double, deptno char(1), job char(1), mgr char(1));
+insert into emp(empno, ename, sal, deptno, job, mgr)
+values
+('1', 'Arun', 8000, 1, 'M', 4),
+('2', 'Ali', 7000, 1, 'C', 1),
+('3', 'Siru', 6000, 1, 'C', 1),
+('4', 'Jack', 9000, 2, 'M', NULL),
+('5', 'Thomas', 8000, 2, 'c', 4);
+  
+select m.ename as 'Employee', e.ename as 'Manager' from emp e, emp m where e.empno = m.mgr ;    
+
+
+
+
+
+
+
+
+
